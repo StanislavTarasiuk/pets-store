@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="fav icon" href="assets/img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Baloo+2:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+    <!-- <script src="https://unpkg.com/htmx.org@2.1.0"></script> -->
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <nav
+        hx-trigger="load"
+        hx-swap="outerHTML"
+        hx-get="global.header-nav.partial.html"
+      ></nav>
+    </header>
+    <main class="main">
+      <section
+        data-hx-trigger="load"
+        data-hx-swap="outerHTML"
+        data-hx-get="index.header-hero.partial.html"
+      ></section>
+      <section data-hx-trigger="load"
+      data-hx-swap="outerHTML"
+      data-hx-get="index.promo-banners.partial.html"></section>
+    </main>
+    <footer class="footer">
+      <nav
+        hx-trigger="load"
+        hx-swap="outerHTML"
+        hx-get="global.footer.partical.html"
+      ></nav>
+    </footer>
+  </body>
+</html>
