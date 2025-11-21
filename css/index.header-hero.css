@@ -129,9 +129,24 @@
 }
 
 .hero__btn-icon {
+  display: none;
+}
+
+.hero__btn--secondary::after {
+  content: "";
+  display: inline-block;
   width: 16px;
   height: 16px;
-  flex-shrink: 0;
+  background-color: currentColor;
+  mask-image: var(--svg-arrow-right-small-mask);
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-image: var(--svg-arrow-right-small-mask);
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  margin-left: 0.25rem;
 }
 
 /* Tablet styles */
