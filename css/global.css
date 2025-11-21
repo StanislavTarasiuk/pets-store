@@ -1,0 +1,108 @@
+:root {
+  /* Colors - Primary & Secondary */
+  --color-primary: #ec6b3c;
+  --color-secondary: #52c1c7;
+  --color-bg: #faf4f2;
+  --color-bg-secondary: #f2e8e4;
+  --color-text-dark: #2d3436;
+  --color-text-light: #636e72;
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-border: #e0e0e0;
+  --color-hover: #3fa8ae;
+
+  /* Button Colors */
+  --color-btn-primary-bg: #fce5d4;
+  --color-btn-primary-hover-bg: #7ddde3;
+  --color-btn-secondary-bg: transparent;
+
+  /* Hero Section Specific */
+  --hero-btn-secondary-bg: transparent;
+
+  /* Promo Banners Specific */
+  --promo-bg-left: #e8d5f0;
+  --promo-bg-right: #ffe8cc;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Container */
+  --container-max-width: 1200px;
+  --container-padding-mobile: 1rem;
+  --container-padding-tablet: 1.5rem;
+  --container-padding-desktop: 2rem;
+
+  /* Typography */
+  --font-family-primary: "PT Sans", sans-serif;
+  --font-family-heading: "Baloo 2", sans-serif;
+
+  /* Transitions */
+  --transition-base: 0.3s ease;
+  --transition-fast: 0.2s ease;
+  --transition-slow: 0.4s ease;
+
+  /* Breakpoints (for reference, use in media queries) */
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+}
+
+/* Base styles - Mobile First */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  font-family: var(--font-family-primary);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.header {
+  margin: 0;
+  width: 100%;
+}
+
+.main {
+  margin: 0;
+  width: 100%;
+}
+
+.hero {
+  margin-top: 0;
+}
+
+/* Prevent horizontal scroll */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Better touch targets for mobile */
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Focus styles for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}

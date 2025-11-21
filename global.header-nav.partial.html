@@ -19,9 +19,11 @@
       </div>
       <input type="checkbox" id="header-nav__menu-toggle" class="header-nav__menu-toggle" />
       <label for="header-nav__menu-toggle" class="header-nav__menu-toggle-label">
-        <span class="header-nav__hamburger"></span>
-        <span class="header-nav__hamburger"></span>
-        <span class="header-nav__hamburger"></span>
+        <span class="header-nav__hamburger-wrapper">
+          <span class="header-nav__hamburger"></span>
+          <span class="header-nav__hamburger"></span>
+          <span class="header-nav__hamburger"></span>
+        </span>
       </label>
       <ul class="header-nav__menu" id="header-nav__menu">
         <li class="header-nav__menu-item">
@@ -91,4 +93,30 @@
     </div>
   </div>
 </nav>
+<script>
+  // Блокування скролу body коли меню відкрите
+  (function() {
+    function initMenuToggle() {
+      const menuToggle = document.getElementById('header-nav__menu-toggle');
+      if (menuToggle && !menuToggle.dataset.listenerAdded) {
+        menuToggle.dataset.listenerAdded = 'true';
+        menuToggle.addEventListener('change', function() {
+          if (this.checked) {
+            document.body.classList.add('menu-open');
+          } else {
+            document.body.classList.remove('menu-open');
+          }
+        });
+      }
+    }
+    
+    // Ініціалізація при завантаженні
+    initMenuToggle();
+    
+    // Ініціалізація для HTMX (якщо використовується)
+    if (typeof htmx !== 'undefined') {
+      document.body.addEventListener('htmx:afterSwap', initMenuToggle);
+    }
+  })();
+</script>
 

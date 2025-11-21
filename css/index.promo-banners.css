@@ -1,28 +1,17 @@
-:root {
-  --promo-bg-left: #e8d5f0;
-  --promo-bg-right: #ffe8cc;
-  --promo-text: #2d3436;
-  --promo-subtitle-color: #ec6b3c;
-  --promo-highlight-color: #ec6b3c;
-  --promo-btn-primary-bg: #fce5d4;
-  --promo-btn-primary-color: #ec6b3c;
-  --promo-btn-primary-hover-bg: #7ddde3;
-  --promo-btn-primary-hover-color: #3fa8ae;
-  --transition-base: 0.3s ease;
-}
+/* Promo Banners - Mobile First Approach */
 
 .promo-banners {
   width: 100%;
-  padding: 1rem;
+  padding: var(--spacing-sm);
 }
 
 .promo-banners__container {
   width: 100%;
-  max-width: 1200px;
+  max-width: var(--container-max-width);
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-sm);
 }
 
 .promo-banners__item {
@@ -30,7 +19,7 @@
   width: 100%;
   border-radius: 0;
   overflow: hidden;
-  padding: 1.5rem 1rem;
+  padding: var(--spacing-md) var(--spacing-sm);
   min-height: 200px;
   display: flex;
   flex-direction: column;
@@ -55,44 +44,45 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--spacing-sm);
   flex: 1;
 }
 
 .promo-banners__subtitle {
-  font-family: "PT Sans", sans-serif;
-  font-size: 0.875rem;
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
   font-weight: 700;
-  color: var(--promo-subtitle-color);
+  color: var(--color-primary);
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .promo-banners__title {
-  font-family: "Baloo 2", sans-serif;
-  font-size: 1.75rem;
+  font-family: var(--font-family-heading);
+  font-size: clamp(1.5rem, 4vw, 1.75rem);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--promo-text);
+  color: var(--color-text-dark);
   margin: 0;
+  word-wrap: break-word;
 }
 
 .promo-banners__highlight {
-  color: var(--promo-highlight-color);
+  color: var(--color-primary);
 }
 
 .promo-banners__btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
   padding: 0.875rem 1.5rem;
   border-radius: 3rem;
-  background-color: var(--promo-btn-primary-bg);
-  color: var(--promo-btn-primary-color);
-  font-family: "PT Sans", sans-serif;
-  font-size: 1rem;
+  background-color: var(--color-btn-primary-bg);
+  color: var(--color-primary);
+  font-family: var(--font-family-primary);
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
   font-weight: 400;
   text-decoration: none;
   cursor: pointer;
@@ -101,21 +91,23 @@
   transition: all var(--transition-base);
   align-self: flex-start;
   margin-top: auto;
+  width: auto;
+  min-width: 120px;
 }
 
 .promo-banners__item--right .promo-banners__btn {
   align-self: center;
-  margin-top: 1rem;
+  margin-top: var(--spacing-sm);
 }
 
 .promo-banners__btn:hover {
-  background-color: var(--promo-btn-primary-hover-bg);
-  color: var(--promo-btn-primary-hover-color);
+  background-color: var(--color-btn-primary-hover-bg);
+  color: var(--color-hover);
   transform: translateY(-2px);
 }
 
 .promo-banners__btn:focus {
-  outline: 2px solid var(--promo-btn-primary-color);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -123,44 +115,49 @@
   transform: translateY(0);
 }
 
-
+/* Tablet styles */
 @media (min-width: 768px) {
   .promo-banners {
-    padding: 1.5rem;
+    padding: var(--spacing-md);
   }
 
   .promo-banners__container {
     flex-direction: row;
-    gap: 1rem;
+    gap: var(--spacing-sm);
   }
 
   .promo-banners__item {
     flex: 1;
     min-height: 250px;
-    padding: 1.5rem;
+    padding: var(--spacing-md);
   }
 
   .promo-banners__title {
-    font-size: 2rem;
+    font-size: clamp(1.75rem, 3vw, 2rem);
   }
 
   .promo-banners__subtitle {
     font-size: 1rem;
   }
+
+  .promo-banners__btn {
+    font-size: 1rem;
+  }
 }
 
+/* Desktop styles */
 @media (min-width: 1024px) {
   .promo-banners {
-    padding: 2rem;
+    padding: var(--spacing-lg);
   }
 
   .promo-banners__item {
     min-height: 280px;
-    padding: 2rem 1.5rem;
+    padding: var(--spacing-lg) var(--spacing-md);
   }
 
   .promo-banners__title {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
   }
 
   .promo-banners__subtitle {
@@ -172,4 +169,3 @@
     font-size: 1.125rem;
   }
 }
-
