@@ -2,7 +2,9 @@
 @import url("./global.header-nav.css");
 @import url("./index.header-hero.css");
 @import url("./index.promo-banners.css");
-@import url("./index.products-carousel.css");
+@import url("./index.pets-carousel.css");
 @import url("./index.safety.css");
-@import url("./index.trending.css");
+@import url("./index.trending-carousel.css");
+@import url("./homepage.css");
+@import url("./index.promotions.css");
 

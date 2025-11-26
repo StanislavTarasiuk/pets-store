@@ -1,0 +1,243 @@
+    .promotions {
+        padding: var(--spacing-lg) 0;
+        width: 100%;
+    }
+
+    .promotions__container {
+        max-width: var(--container-max-width);
+        margin: 0 auto;
+        padding: 0 var(--container-padding-mobile);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    /* Top Section - Two Cards */
+    .promotions__top {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+    }
+
+    .promotions__card {
+        position: relative;
+        overflow: hidden;
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        /* No border radius in screenshot, looks sharp or default */
+    }
+
+    /* Left Card - Aquariums */
+    .promotions__card--aquarium {
+        background-color: var(--color-white);
+        text-align: center;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: var(--spacing-xl);
+    }
+
+    .promotions__card--aquarium .promotions__content {
+        z-index: 2;
+        padding: 0 var(--spacing-md);
+        margin-bottom: var(--spacing-md);
+    }
+
+    .promotions__title {
+        font-family: var(--font-family-heading);
+        font-size: 2rem;
+        line-height: 1.2;
+        color: var(--color-text-dark);
+        margin: 0 0 var(--spacing-sm) 0;
+        font-weight: 700;
+    }
+
+    .promotions__highlight {
+        color: var(--color-primary);
+    }
+
+    .promotions__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--color-secondary); /* Cyan color */
+        font-weight: 700;
+        text-decoration: none;
+        font-family: var(--font-family-primary);
+        transition: color var(--transition-base);
+    }
+
+    .promotions__link-arrow {
+        color: var(--color-secondary);
+        margin-left: 0.25rem;
+    }
+
+    .promotions__link:hover {
+        color: var(--color-hover);
+    }
+
+    .promotions__link:hover .promotions__link-arrow {
+        color: var(--color-hover);
+    }
+
+    .promotions__image-wrapper-aquarium {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+    }
+    
+    .promotions__image-aquarium {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Right Card - Picks */
+    .promotions__card--picks {
+        background-color: var(--color-promotions-blue);
+        padding: var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        position: relative;
+    }
+
+    .promotions__subtitle {
+        font-size: 0.875rem;
+        color: var(--color-text-light);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: var(--spacing-xs);
+        font-weight: 600;
+    }
+
+    .promotions__price {
+        font-family: var(--font-family-primary);
+        font-size: 1.125rem;
+        color: var(--color-text-light);
+        font-style: italic;
+        margin: var(--spacing-sm) 0 var(--spacing-md) 0;
+    }
+
+    .promotions__price-highlight {
+        font-weight: 700;
+        font-style: normal;
+        color: var(--color-primary);
+    }
+
+    .promotions__btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border: 1px solid var(--color-text-dark); /* Dark border as seen */
+        border-radius: 50px;
+        color: var(--color-text-dark); /* Dark text as seen */
+        text-decoration: none;
+        font-weight: 600;
+        transition: all var(--transition-base);
+        background: transparent;
+    }
+
+    .promotions__btn:hover {
+        background-color: var(--color-text-dark);
+        color: var(--color-white);
+    }
+
+    .promotions__image-wrapper-picks {
+        margin-top: var(--spacing-md);
+        align-self: flex-end;
+        width: 60%;
+        max-width: 300px;
+    }
+    
+    .promotions__image-picks {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    /* Bottom Section - Brands */
+    .promotions__bottom {
+        width: 100%;
+    }
+
+    .promotions__brands-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Mobile 2 cols */
+        gap: var(--spacing-md);
+    }
+
+    .promotions__brand {
+        background-color: var(--color-promotions-cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        padding: var(--spacing-sm);
+        transition: transform var(--transition-base);
+    }
+    
+    .promotions__brand:hover {
+        transform: translateY(-2px);
+    }
+
+    .promotions__brand img {
+        max-width: 80%;
+        max-height: 60%;
+        object-fit: contain;
+        filter: grayscale(0%); /* Brands are colored in screenshot? Looks orange/brown tint mostly */
+    }
+
+    /* Tablet Breakpoint */
+    @media (min-width: 768px) {
+        .promotions__container {
+            padding: 0 var(--container-padding-tablet);
+        }
+        
+        .promotions__brands-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    /* Desktop Breakpoint */
+    @media (min-width: 1024px) {
+        .promotions__container {
+            padding: 0 var(--container-padding-desktop);
+        }
+
+        .promotions__top {
+            grid-template-columns: 1fr 1fr;
+            height: 400px; /* Fixed height for alignment */
+        }
+
+        .promotions__card {
+            height: 100%;
+            min-height: auto;
+        }
+        
+        /* Specific Layout Adjustments for Desktop */
+        .promotions__card--picks {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--spacing-xl);
+        }
+
+        .promotions__card--picks .promotions__content {
+            flex: 1;
+            z-index: 2;
+        }
+
+        .promotions__image-wrapper-picks {
+            width: 50%;
+            margin-top: 0;
+            align-self: center;
+        }
+
+        .promotions__brands-grid {
+            grid-template-columns: repeat(6, 1fr);
+        }
+    }
+

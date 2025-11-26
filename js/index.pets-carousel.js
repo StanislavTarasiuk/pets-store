@@ -1,17 +1,17 @@
 (function () {
-  function initProductsCarousel() {
-    const carousel = document.querySelector(".products-carousel");
+  function initPetsCarousel() {
+    const carousel = document.querySelector(".pets-carousel");
     if (!carousel) return;
 
-    const track = carousel.querySelector(".products-carousel__track");
-    const prevBtn = carousel.querySelector(".products-carousel__nav--prev");
-    const nextBtn = carousel.querySelector(".products-carousel__nav--next");
+    const track = carousel.querySelector(".pets-carousel__track");
+    const prevBtn = carousel.querySelector(".pets-carousel__nav--prev");
+    const nextBtn = carousel.querySelector(".pets-carousel__nav--next");
 
     if (!track || !prevBtn || !nextBtn) return;
 
     const originalItems = Array.from(
       track.querySelectorAll(
-        ".products-carousel__item:not(.products-carousel__item--clone)"
+        ".pets-carousel__item:not(.pets-carousel__item--clone)"
       )
     );
     if (originalItems.length === 0) return;
@@ -20,43 +20,43 @@
     let isScrolling = false;
     let currentIndex = 0;
 
-    // Clone items for infinite loop
+    // Clone items for infinite loop - клонуємо всі елементи для справжнього безкінечного скролу
     function cloneItems() {
       // Remove existing clones
       const existingClones = track.querySelectorAll(
-        ".products-carousel__item--clone"
+        ".pets-carousel__item--clone"
       );
       existingClones.forEach((clone) => clone.remove());
 
-      // Clone first 4 items to the end
-      const itemsToClone = Math.min(4, totalItems);
-      for (let i = 0; i < itemsToClone; i++) {
-        const clone = originalItems[i].cloneNode(true);
-        clone.classList.add("products-carousel__item--clone");
+      // Clone all items to the end for seamless infinite scroll
+      originalItems.forEach((item) => {
+        const clone = item.cloneNode(true);
+        clone.classList.add("pets-carousel__item--clone");
         track.appendChild(clone);
-      }
+      });
 
-      // Clone last 4 items to the beginning
-      const startIndex = Math.max(0, totalItems - itemsToClone);
-      for (let i = startIndex; i < totalItems; i++) {
-        const clone = originalItems[i].cloneNode(true);
-        clone.classList.add("products-carousel__item--clone");
+      // Clone all items to the beginning for seamless infinite scroll
+      originalItems.forEach((item) => {
+        const clone = item.cloneNode(true);
+        clone.classList.add("pets-carousel__item--clone");
         track.insertBefore(clone, originalItems[0]);
-      }
+      });
     }
 
     // Initialize clones
     cloneItems();
 
-    const allItems = Array.from(
-      track.querySelectorAll(".products-carousel__item")
+    let allItems = Array.from(
+      track.querySelectorAll(".pets-carousel__item")
     );
-    const clones = Array.from(
-      track.querySelectorAll(".products-carousel__item--clone")
-    );
-    const clonesAtStart = clones.length / 2;
+    const clonesAtStart = totalItems; // Кількість клонів на початку = кількість оригінальних елементів
     const firstOriginalIndex = clonesAtStart;
     const lastOriginalIndex = firstOriginalIndex + totalItems - 1;
+
+    // Функція для оновлення списку всіх елементів
+    function updateAllItems() {
+      allItems = Array.from(track.querySelectorAll(".pets-carousel__item"));
+    }
 
     // Set initial position to first original item
     function setInitialPosition() {
@@ -136,24 +136,25 @@
       if (itemWidth === 0) return;
 
       const scrollLeft = track.scrollLeft;
-      const currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+      const itemSize = itemWidth + gap;
+      const currentIndex = Math.round(scrollLeft / itemSize);
 
-      // If scrolled to clones at the end, jump to original items
-      if (currentIndex >= allItems.length - 2) {
-        const offset = currentIndex - (allItems.length - 4);
+      // Якщо доскролили до клонів в кінці, перестрибнути на оригінальні елементи
+      if (currentIndex >= firstOriginalIndex + totalItems) {
+        const offset = currentIndex - (firstOriginalIndex + totalItems);
         const newIndex = firstOriginalIndex + offset;
         track.style.scrollBehavior = "auto";
-        track.scrollLeft = newIndex * (itemWidth + gap);
+        track.scrollLeft = newIndex * itemSize;
         setTimeout(() => {
           track.style.scrollBehavior = "smooth";
         }, 50);
       }
-      // If scrolled to clones at the beginning, jump to original items
-      else if (currentIndex <= clonesAtStart) {
+      // Якщо доскролили до клонів на початку, перестрибнути на оригінальні елементи
+      else if (currentIndex < clonesAtStart) {
         const offset = clonesAtStart - currentIndex;
-        const newIndex = lastOriginalIndex - offset;
+        const newIndex = lastOriginalIndex - offset + 1;
         track.style.scrollBehavior = "auto";
-        track.scrollLeft = newIndex * (itemWidth + gap);
+        track.scrollLeft = newIndex * itemSize;
         setTimeout(() => {
           track.style.scrollBehavior = "smooth";
         }, 50);
@@ -176,6 +177,7 @@
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         cloneItems();
+        updateAllItems();
         setTimeout(() => {
           setInitialPosition();
         }, 100);
@@ -190,14 +192,14 @@
 
   // Initialize on load
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initProductsCarousel);
+    document.addEventListener("DOMContentLoaded", initPetsCarousel);
   } else {
-    initProductsCarousel();
+    initPetsCarousel();
   }
 
   // Initialize for HTMX (if used)
   if (typeof htmx !== "undefined") {
-    document.body.addEventListener("htmx:afterSwap", initProductsCarousel);
+    document.body.addEventListener("htmx:afterSwap", initPetsCarousel);
   }
 })();
 

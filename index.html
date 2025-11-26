@@ -18,6 +18,7 @@
       integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
       crossorigin="anonymous"
     ></script>
+    <script type="module" src="js/index.js"></script>
   </head>
   <body>
     <header class="header">
@@ -39,14 +40,17 @@
       <section
         data-hx-trigger="load"
         data-hx-swap="outerHTML"
-        data-hx-get="index.products-carousel.partial.html"
+        data-hx-get="index.pets-carousel.partial.html"
       ></section>
       <section data-hx-trigger="load"
       data-hx-swap="outerHTML"
       data-hx-get="index.safety.partical.html"></section> 
       <section data-hx-trigger="load"
       data-hx-swap="outerHTML"
-      data-hx-get="index.trending.partial.html"></section>
+      data-hx-get="index.trending-carousel.partial.html"></section>
+      <section data-hx-trigger="load"
+      data-hx-swap="outerHTML"
+      data-hx-get="index.promotions.partial.html"></section>
     </main>
     <footer class="footer">
       <nav

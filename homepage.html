@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Page</title>
+    <link rel="fav icon" href="assets/img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Baloo+2:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/global.header-nav.css" />
+    <link rel="stylesheet" href="css/homepage.css" />
+    <script
+      src="https://unpkg.com/htmx.org@1.9.10"
+      integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <nav
+        hx-trigger="load"
+        hx-swap="outerHTML"
+        hx-get="global.header-nav.partial.html"
+      ></nav>
+    </header>
+
+    <main class="main">
+      <div class="product-page">
+        <div class="product-page__container">
+          <nav class="product-page__breadcrumbs" aria-label="Breadcrumb">
+            <a href="/" class="product-page__breadcrumb-link">Store homepage</a>
+            <!-- Optional separator if needed via CSS or content -->
+            <!-- <span class="product-page__breadcrumb-separator">/</span> -->
+            <!-- <span class="product-page__breadcrumb-current" id="breadcrumb-name">OPTY Pet Carrier(2321)</span> -->
+          </nav>
+
+          <div class="product-page__content">
+            <!-- Product Gallery -->
+            <div class="product-page__gallery">
+              <div class="product-page__main-image-container">
+                <button
+                  class="product-page__gallery-arrow product-page__gallery-arrow--prev"
+                  aria-label="Previous image"
+                ></button>
+                <img
+                  src="assets/img/trending-carousel/opti_pet_carrier.png"
+                  alt="OPTY Pet Carrier"
+                  class="product-page__main-image"
+                  id="product-image"
+                />
+                <button
+                  class="product-page__gallery-arrow product-page__gallery-arrow--next"
+                  aria-label="Next image"
+                ></button>
+              </div>
+              <div class="product-page__thumbnails">
+                <button
+                  class="product-page__thumbnail product-page__thumbnail--active"
+                  aria-label="View image 1"
+                >
+                  <img
+                    src="assets/img/trending-carousel/opti_pet_carrier.png"
+                    alt="Thumbnail"
+                    id="product-thumbnail"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <!-- Product Info -->
+            <div class="product-page__info">
+              <div class="product-page__status">In stock</div>
+              <h1 class="product-page__title" id="product-name">
+                OPTY Pet Carrier(2321)
+              </h1>
+              <p class="product-page__code">
+                Product code <span id="product-code">48</span>
+              </p>
+              <div class="product-page__price" id="product-price">$8,00</div>
+
+              <div class="product-page__actions">
+                <div class="product-page__quantity">
+                  <input
+                    type="number"
+                    class="product-page__quantity-input"
+                    value="1"
+                    min="1"
+                    aria-label="Quantity"
+                  />
+                  <div class="product-page__quantity-controls">
+                    <button
+                      class="product-page__quantity-btn product-page__quantity-btn--up"
+                      aria-label="Increase quantity"
+                    ></button>
+                    <button
+                      class="product-page__quantity-btn product-page__quantity-btn--down"
+                      aria-label="Decrease quantity"
+                    ></button>
+                  </div>
+                </div>
+                <button class="product-page__add-to-cart">Add to cart</button>
+              </div>
+
+              <div class="product-page__tabs">
+                <div class="product-page__tabs-header">
+                  <button
+                    class="product-page__tab-btn product-page__tab-btn--active"
+                  >
+                    DESCRIPTION
+                  </button>
+                </div>
+                <div class="product-page__tab-content">
+                  <p class="product-page__description" id="product-description">
+                    This plastic carrier is large enough even for adult cats. We
+                    cannot relieve pets of the stress of being carried outside,
+                    but we can make it more comfortable, right?
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <nav
+        hx-trigger="load"
+        hx-swap="outerHTML"
+        hx-get="global.footer.partical.html"
+      ></nav>
+    </footer>
+    <script type="module" src="js/homepage.js"></script>
+  </body>
+</html>

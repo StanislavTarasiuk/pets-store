@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "AGA Rope Toy",
+        "price": "$5,00",
+        "image": "assets/img/trending-carousel/aga_rope_toy.png",
+        "description": "A durable and fun rope toy perfect for your dog's playtime. Made from high-quality materials, this toy will keep your pet entertained for hours."
+    },
+    {
+        "id": 2,
+        "name": "DORA Pet Carrier",
+        "price": "$23,00",
+        "image": "assets/img/trending-carousel/dora_pet_carrier.png",
+        "description": "A comfortable and secure pet carrier for safe transportation. Features ventilation windows and a sturdy design to keep your pet safe during travel."
+    },
+    {
+        "id": 3,
+        "name": "DORA Metal Pet Brush",
+        "price": "$15,00",
+        "image": "assets/img/trending-carousel/dora_metal_pet_bursh.png",
+        "description": "Professional-grade metal brush for grooming your pet's coat. Effectively removes loose hair and tangles while being gentle on your pet's skin."
+    },
+    {
+        "id": 4,
+        "name": "Kitten's Heaven Set",
+        "price": "$12,00",
+        "image": "assets/img/trending-carousel/kittens_haven_set.png",
+        "description": "Have you adopted a kitten? Congratulations! It will love this set of toys for sure. Here is everything to entertain your pet — bright woolen mice, sticks with ropes, and clinking balls."
+    },
+    {
+        "id": 5,
+        "name": "OPTY Pet Carrier",
+        "price": "$8,00",
+        "image": "assets/img/trending-carousel/opti_pet_carrier.png",
+        "description": "An affordable and reliable pet carrier option. Lightweight yet durable, perfect for small pets and short trips."
+    }
+]
