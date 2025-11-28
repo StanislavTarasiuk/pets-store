@@ -1,4 +1,10 @@
 (function () {
+  function getHomepageUrl(productId) {
+    const pathname = window.location.pathname;
+    const basePath = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+    return basePath + 'homepage?id=' + productId;
+  }
+
   function renderProducts(products) {
     const track = document.querySelector(".trending-carousel__track");
     if (!track) return;
@@ -16,7 +22,7 @@
               />
             </div>
             <h3 class="trending-carousel__item-title">
-              <a href="/homepage?id=${product.id}" class="trending-carousel__item-link">${product.name}</a>
+              <a href="${getHomepageUrl(product.id)}" class="trending-carousel__item-link">${product.name}</a>
             </h3>
             <p class="trending-carousel__item-price">${product.price}</p>
             <button class="trending-carousel__item-button" type="button">
