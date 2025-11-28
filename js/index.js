@@ -1,8 +1,8 @@
 async function init() {
-    // Завантажуємо модулі каруселей
-    // Обидва модулі мають власні обробники HTMX для автоматичної ініціалізації
     await import('./index.pets-carousel.js');
     await import('./index.trending-carousel.js');
+    await import('./index.arrivals-carousel.js');
+    await import('./homepage.js');
 }
 
 const totalPartials = document.querySelectorAll('[hx-trigger="load"], [data-hx-trigger="load"]').length;
