@@ -31,6 +31,10 @@
     /* Left Card - Aquariums */
     .promotions__card--aquarium {
         background-color: var(--color-white);
+        background-image: url('../assets/img/homepage-promotions/gold-fish.png');
+        background-size: cover;
+        background-position: center bottom;
+        background-repeat: no-repeat;
         text-align: center;
         align-items: center;
         justify-content: space-between;
@@ -81,22 +85,20 @@
     }
 
     .promotions__image-wrapper-aquarium {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
+        display: none; /* Hidden as image is now background */
     }
     
     .promotions__image-aquarium {
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        display: block;
+        display: none; /* Hidden as image is now background */
     }
 
     /* Right Card - Picks */
     .promotions__card--picks {
         background-color: var(--color-promotions-blue);
+        background-image: url('../assets/img/homepage-promotions/picks.png');
+        background-size: cover;
+        background-position: right center;
+        background-repeat: no-repeat;
         padding: var(--spacing-xl);
         display: flex;
         flex-direction: column;
@@ -146,16 +148,11 @@
     }
 
     .promotions__image-wrapper-picks {
-        margin-top: var(--spacing-md);
-        align-self: flex-end;
-        width: 60%;
-        max-width: 300px;
+        display: none; /* Hidden as image is now background */
     }
     
     .promotions__image-picks {
-        width: 100%;
-        height: auto;
-        display: block;
+        display: none; /* Hidden as image is now background */
     }
 
     /* Bottom Section - Brands */
@@ -223,17 +220,12 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 var(--spacing-xl);
+            background-position: right center;
         }
 
         .promotions__card--picks .promotions__content {
             flex: 1;
             z-index: 2;
-        }
-
-        .promotions__image-wrapper-picks {
-            width: 50%;
-            margin-top: 0;
-            align-self: center;
         }
 
         .promotions__brands-grid {
