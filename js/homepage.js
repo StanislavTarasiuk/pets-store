@@ -47,13 +47,15 @@
   }
 
   try {
-    const response = await fetch("api/product.json");
+    const apiUrl = new URL('api/product.json', window.location.href);
+    const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error("Failed to load products");
     }
 
     const products = await response.json();
-    const product = products.find((p) => p.id == id);
+    const productId = parseInt(id, 10);
+    const product = products.find((p) => p.id === productId);
 
     if (product) {
       if (document.readyState === "loading") {
