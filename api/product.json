@@ -33,5 +33,40 @@
         "price": "$8,00",
         "image": "assets/img/trending-carousel/opti_pet_carrier.png",
         "description": "An affordable and reliable pet carrier option. Lightweight yet durable, perfect for small pets and short trips."
+    },
+    {
+        "id": 6,
+        "name": "VITALIFE Crunch Sticks",
+        "price": "$5,00",
+        "image": "assets/img/arrivals-carousel/vitalife_crunch_sticks_treat.png",
+        "description": "Delicious crunchy treats covered in seeds and colorful sprinkles. Perfect for birds and small animals, these sticks provide essential nutrients and entertainment."
+    },
+    {
+        "id": 7,
+        "name": "DUNA Woven Toy",
+        "price": "$1,50",
+        "image": "assets/img/arrivals-carousel/duna_woven_toy.png",
+        "description": "A soft and cuddly woven plush toy perfect for your pet's playtime. Made from high-quality materials, this adorable toy will keep your pet entertained and comforted."
+    },
+    {
+        "id": 8,
+        "name": "SERA Woven Leash",
+        "price": "$2,00",
+        "image": "assets/img/arrivals-carousel/sera_woven_leash.png",
+        "description": "A durable and comfortable woven rope leash with adjustable plastic components and a secure metal clip. Perfect for daily walks with your pet."
+    },
+    {
+        "id": 9,
+        "name": "OPTY Plastic Bowl",
+        "price": "$3,00",
+        "image": "assets/img/arrivals-carousel/opty_plastic_bowl.png",
+        "description": "Sturdy and easy-to-clean plastic bowls for your pet's food and water. Available in various colors, these bowls are perfect for daily feeding."
+    },
+    {
+        "id": 10,
+        "name": "EGO Butterfly Toy",
+        "price": "$4,00",
+        "image": "assets/img/arrivals-carousel/ego_butterfly_toy.png",
+        "description": "An engaging butterfly-shaped toy that will capture your pet's attention. Made from safe materials, this toy encourages active play and exercise."
     }
 ]
