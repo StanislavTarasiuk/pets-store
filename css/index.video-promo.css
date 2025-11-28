@@ -76,20 +76,14 @@
 .video-promo__promo {
   width: 100%;
   min-height: 250px;
-  background-color: #ffe8e8;
+  background-color: var(--color-white);
+  background-image: url("../assets/img/video-promo/snacks.png");
+  background-position: right center;
+  background-size: cover;
+  background-repeat: no-repeat;
   padding: var(--spacing-md);
   position: relative;
   overflow: hidden;
-}
-
-.video-promo__promo-image {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: auto;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
 }
 
 .video-promo__promo::before {
@@ -248,7 +242,7 @@
 
   .video-promo__video {
     width: var(--video-promo-cat-width);
-    max-height: var(--video-promo-cat-height);
+    height: var(--video-promo-cat-height);
     flex-shrink: 0;
   }
 

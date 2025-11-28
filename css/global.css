@@ -41,10 +41,10 @@
   --trending-carousel-card-bg: #f5f0ed;
 
   /* Video Promo Section Specific */
-  --video-promo-cat-width: 45%;
-  --video-promo-cat-height: 300px;
-  --video-promo-snacks-width: 50%;
-  --video-promo-snacks-height: 300px;
+  --video-promo-cat-width: 670px;
+  --video-promo-cat-height: 510px;
+  --video-promo-snacks-width: 450px;
+  --video-promo-snacks-height: 510px;
   --color-promo-bg: #fce5d4;
   --color-promo-link-text: #2d3436;
   --font-size-title-l: clamp(1.5rem, 4vw, 2rem);
