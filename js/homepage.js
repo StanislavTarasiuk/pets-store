@@ -1,9 +1,4 @@
-/**
- * Homepage Product Details Module
- */
-
 (async function () {
-  // Ініціалізуємо quantity controls при завантаженні сторінки
   function initQuantityControls() {
     const quantityInput = document.querySelector(".product-page__quantity-input");
     const quantityBtnUp = document.querySelector(".product-page__quantity-btn--up");
@@ -13,16 +8,13 @@
       return;
     }
 
-    // Збільшення кількості
     quantityBtnUp.addEventListener("click", () => {
       const currentValue = parseInt(quantityInput.value, 10) || 1;
-      const min = parseInt(quantityInput.min, 10) || 1;
       const newValue = currentValue + 1;
       quantityInput.value = newValue;
       quantityInput.dispatchEvent(new Event("change", { bubbles: true }));
     });
 
-    // Зменшення кількості
     quantityBtnDown.addEventListener("click", () => {
       const currentValue = parseInt(quantityInput.value, 10) || 1;
       const min = parseInt(quantityInput.min, 10) || 1;
@@ -31,7 +23,6 @@
       quantityInput.dispatchEvent(new Event("change", { bubbles: true }));
     });
 
-    // Валідація при ручному введенні
     quantityInput.addEventListener("change", () => {
       const value = parseInt(quantityInput.value, 10);
       const min = parseInt(quantityInput.min, 10) || 1;
@@ -41,11 +32,9 @@
     });
   }
 
-  // Отримуємо ID з URL
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
-  // Ініціалізуємо quantity controls незалежно від наявності id
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initQuantityControls);
   } else {
@@ -58,15 +47,12 @@
   }
 
   try {
-    // Завантажуємо дані
     const response = await fetch("api/product.json");
     if (!response.ok) {
       throw new Error("Failed to load products");
     }
 
     const products = await response.json();
-    
-    // Шукаємо товар (нестроге порівняння для сумісності типів)
     const product = products.find((p) => p.id == id);
 
     if (product) {
@@ -98,7 +84,6 @@
       img.alt = product.name;
     }
     
-    // Оновлюємо thumbnail з тим самим зображенням, що і головне фото
     if (thumbnail) {
       thumbnail.src = product.image;
       thumbnail.alt = product.name;
@@ -106,7 +91,6 @@
     
     if (name) name.innerText = product.name;
     
-    // Оновлюємо також breadcrumbs
     const breadcrumbName = document.getElementById("breadcrumb-name");
     if (breadcrumbName) breadcrumbName.innerText = product.name;
     

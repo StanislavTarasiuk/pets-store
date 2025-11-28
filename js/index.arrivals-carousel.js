@@ -1,7 +1,3 @@
-/**
- * Arrivals Products Carousel Module
- */
-
 (function () {
   function renderProducts(products) {
     const track = document.querySelector(".arrivals-carousel__track");
@@ -83,7 +79,6 @@
   if (totalItems === 0) return;
 
   let isScrolling = false;
-  let currentIndex = 0;
 
   function cloneItems() {
     const existingClones = track.querySelectorAll(".arrivals-carousel__item--clone");

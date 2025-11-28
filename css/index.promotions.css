@@ -12,7 +12,6 @@
         gap: var(--spacing-md);
     }
 
-    /* Top Section - Two Cards */
     .promotions__top {
         display: grid;
         grid-template-columns: 1fr;
@@ -25,10 +24,8 @@
         min-height: 300px;
         display: flex;
         flex-direction: column;
-        /* No border radius in screenshot, looks sharp or default */
     }
 
-    /* Left Card - Aquariums */
     .promotions__card--aquarium {
         background-color: var(--color-white);
         background-image: url('../assets/img/homepage-promotions/gold-fish.png');
@@ -64,7 +61,7 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        color: var(--color-secondary); /* Cyan color */
+        color: var(--color-secondary);
         font-weight: 700;
         text-decoration: none;
         font-family: var(--font-family-primary);
@@ -85,14 +82,13 @@
     }
 
     .promotions__image-wrapper-aquarium {
-        display: none; /* Hidden as image is now background */
+        display: none;
     }
     
     .promotions__image-aquarium {
-        display: none; /* Hidden as image is now background */
+        display: none;
     }
 
-    /* Right Card - Picks */
     .promotions__card--picks {
         background-color: var(--color-promotions-blue);
         background-image: url('../assets/img/homepage-promotions/picks.png');
@@ -133,9 +129,9 @@
     .promotions__btn {
         display: inline-block;
         padding: 0.75rem 1.5rem;
-        border: 1px solid var(--color-text-dark); /* Dark border as seen */
+        border: 1px solid var(--color-text-dark);
         border-radius: 50px;
-        color: var(--color-text-dark); /* Dark text as seen */
+        color: var(--color-text-dark);
         text-decoration: none;
         font-weight: 600;
         transition: all var(--transition-base);
@@ -148,21 +144,20 @@
     }
 
     .promotions__image-wrapper-picks {
-        display: none; /* Hidden as image is now background */
+        display: none;
     }
     
     .promotions__image-picks {
-        display: none; /* Hidden as image is now background */
+        display: none;
     }
 
-    /* Bottom Section - Brands */
     .promotions__bottom {
         width: 100%;
     }
 
     .promotions__brands-grid {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); /* Mobile 2 cols */
+        grid-template-columns: repeat(2, 1fr);
         gap: var(--spacing-md);
     }
 
@@ -184,10 +179,9 @@
         max-width: 80%;
         max-height: 60%;
         object-fit: contain;
-        filter: grayscale(0%); /* Brands are colored in screenshot? Looks orange/brown tint mostly */
+        filter: grayscale(0%);
     }
 
-    /* Tablet Breakpoint */
     @media (min-width: 768px) {
         .promotions__container {
             padding: 0 var(--container-padding-tablet);
@@ -198,7 +192,6 @@
         }
     }
 
-    /* Desktop Breakpoint */
     @media (min-width: 1024px) {
         .promotions__container {
             padding: 0 var(--container-padding-desktop);
@@ -206,7 +199,7 @@
 
         .promotions__top {
             grid-template-columns: 1fr 1fr;
-            height: 400px; /* Fixed height for alignment */
+            height: 400px;
         }
 
         .promotions__card {
@@ -214,7 +207,6 @@
             min-height: auto;
         }
         
-        /* Specific Layout Adjustments for Desktop */
         .promotions__card--picks {
             flex-direction: row;
             align-items: center;

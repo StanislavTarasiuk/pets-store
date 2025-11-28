@@ -64,7 +64,6 @@
   </div>
 </nav>
 <script>
-  // Блокування скролу body коли меню відкрите
   (function() {
     function initMenuToggle() {
       const menuToggle = document.getElementById('header-nav__menu-toggle');
@@ -80,10 +79,8 @@
       }
     }
     
-    // Ініціалізація при завантаженні
     initMenuToggle();
     
-    // Ініціалізація для HTMX (якщо використовується)
     if (typeof htmx !== 'undefined') {
       document.body.addEventListener('htmx:afterSwap', initMenuToggle);
     }

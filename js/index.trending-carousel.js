@@ -1,9 +1,4 @@
-/**
- * Trending Products Carousel Module
- */
-
 (function () {
-  // Функція для рендерингу товарів
   function renderProducts(products) {
     const track = document.querySelector(".trending-carousel__track");
     if (!track) return;
@@ -34,7 +29,6 @@
     track.innerHTML = productsHtml.join("");
   }
 
-  // Функція для завантаження та рендерингу товарів
   async function loadAndRenderProducts() {
     try {
       const response = await fetch("api/product.json");
@@ -64,7 +58,6 @@
       return;
     }
 
-    // Завантажуємо товари перед ініціалізацією каруселі
     const products = await loadAndRenderProducts();
     if (products.length === 0) {
       console.warn("No products loaded");
@@ -77,7 +70,6 @@
       return;
     }
 
-  // Check if already initialized
   const wasInitialized = track.dataset.initialized === "true";
   track.dataset.initialized = "true";
 
@@ -86,22 +78,17 @@
   if (totalItems === 0) return;
 
   let isScrolling = false;
-  let currentIndex = 0;
 
-  // Clone items for infinite loop - клонуємо всі елементи для справжнього безкінечного скролу
   function cloneItems() {
-    // Remove existing clones
     const existingClones = track.querySelectorAll(".trending-carousel__item--clone");
     existingClones.forEach((clone) => clone.remove());
 
-    // Clone all items to the end for seamless infinite scroll
     originalItems.forEach((item) => {
       const clone = item.cloneNode(true);
       clone.classList.add("trending-carousel__item--clone");
       track.appendChild(clone);
     });
 
-    // Clone all items to the beginning for seamless infinite scroll
     originalItems.forEach((item) => {
       const clone = item.cloneNode(true);
       clone.classList.add("trending-carousel__item--clone");
@@ -109,20 +96,17 @@
     });
   }
 
-  // Initialize clones
   cloneItems();
 
   let allItems = Array.from(track.querySelectorAll(".trending-carousel__item"));
-  const clonesAtStart = totalItems; // Кількість клонів на початку = кількість оригінальних елементів
+  const clonesAtStart = totalItems;
   const firstOriginalIndex = clonesAtStart;
   const lastOriginalIndex = firstOriginalIndex + totalItems - 1;
 
-  // Функція для оновлення списку всіх елементів
   function updateAllItems() {
     allItems = Array.from(track.querySelectorAll(".trending-carousel__item"));
   }
 
-  // Set initial position to first original item
   function setInitialPosition() {
     if (allItems.length === 0) return;
     const firstItem = allItems[firstOriginalIndex];
@@ -203,7 +187,6 @@
     const itemSize = itemWidth + gap;
     const currentIndex = Math.round(scrollLeft / itemSize);
 
-    // Якщо доскролили до клонів в кінці, перестрибнути на оригінальні елементи
     if (currentIndex >= firstOriginalIndex + totalItems) {
       const offset = currentIndex - (firstOriginalIndex + totalItems);
       const newIndex = firstOriginalIndex + offset;
@@ -212,9 +195,7 @@
       setTimeout(() => {
         track.style.scrollBehavior = "smooth";
       }, 50);
-    }
-    // Якщо доскролили до клонів на початку, перестрибнути на оригінальні елементи
-    else if (currentIndex < clonesAtStart) {
+    } else if (currentIndex < clonesAtStart) {
       const offset = clonesAtStart - currentIndex;
       const newIndex = lastOriginalIndex - offset + 1;
       track.style.scrollBehavior = "auto";
@@ -225,9 +206,7 @@
     }
   }
 
-  // Event listeners - перевіряємо, чи кнопки існують перед додаванням обробників
   if (prevBtn && nextBtn) {
-    // Якщо вже було ініціалізовано, видаляємо старі обробники через клонування
     if (wasInitialized) {
       const newPrevBtn = prevBtn.cloneNode(true);
       const newNextBtn = nextBtn.cloneNode(true);
@@ -257,7 +236,6 @@
     }
   });
 
-  // Handle window resize
   let resizeTimer;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimer);
@@ -270,13 +248,11 @@
     }, 250);
   });
 
-    // Initialize position
     setTimeout(() => {
       setInitialPosition();
     }, 200);
   }
 
-  // Initialize on load
   async function init() {
     await initTrendingCarousel();
   }
@@ -287,10 +263,7 @@
     init();
   }
 
-  // Initialize for HTMX (if used)
   if (typeof htmx !== "undefined") {
     document.body.addEventListener("htmx:afterSwap", init);
   }
 })();
-
-
