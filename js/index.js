@@ -2,6 +2,7 @@ async function init() {
     await import('./index.pets-carousel.js');
     await import('./index.trending-carousel.js');
     await import('./index.arrivals-carousel.js');
+    await import('./index.testimonials.js');
     await import('./homepage.js');
 }
 
