@@ -1,0 +1,234 @@
+/* Food Section - Mobile First Approach */
+
+.food {
+  width: 100%;
+  background-color: var(--color-food-bg);
+  padding: var(--spacing-xl) var(--container-padding-mobile);
+}
+
+.food__container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+.food__header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.food__title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-food-title);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-text-dark);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.food__icon-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: var(--spacing-sm) 0;
+}
+
+.food__icon {
+  width: 80px;
+  height: auto;
+  display: block;
+  background-image: var(--svg-bone-icon);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.food__icon svg {
+  display: none;
+}
+
+.food__subtitle {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-food-ingredients);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  margin: var(--spacing-sm) 0 0 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.food__categories {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+.food__category {
+  width: 100%;
+}
+
+.food__category-title {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-food-category-title);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-dark);
+  margin: 0 0 var(--spacing-md) 0;
+  position: relative;
+  display: inline-block;
+  padding-bottom: var(--spacing-xs);
+}
+
+.food__category-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--color-food-category-accent);
+}
+
+.food__products {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-food-product-gap);
+}
+
+.food__product {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-md);
+  width: 100%;
+  align-items: flex-start;
+}
+
+.food__product-image-wrapper {
+  flex-shrink: 0;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food__product-image {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.food__product-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.food__product-header {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-xs);
+}
+
+.food__product-name {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-food-product-name);
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--color-text-dark);
+  margin: 0;
+  text-align: left;
+  flex: 1;
+  padding-right: var(--spacing-sm);
+  border-right: 1px solid var(--color-border);
+}
+
+.food__product-price {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-food-price);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-primary);
+  text-align: right;
+  flex-shrink: 0;
+  padding-left: var(--spacing-sm);
+}
+
+.food__product-ingredients {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.food__ingredient {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-food-ingredients);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--color-text-light);
+  text-align: left;
+}
+
+/* Tablet styles */
+@media (min-width: 768px) {
+  .food {
+    padding: var(--spacing-xl) var(--container-padding-tablet);
+  }
+
+  .food__categories {
+    gap: var(--spacing-xl);
+  }
+
+  .food__product-image-wrapper {
+    width: 140px;
+  }
+
+  .food__product-image {
+    max-width: 140px;
+  }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+  .food {
+    padding: var(--spacing-xl) var(--container-padding-desktop);
+  }
+
+  .food__header {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .food__categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+    align-items: start;
+  }
+
+  .food__category {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .food__products {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-food-product-gap);
+  }
+
+  .food__product-image-wrapper {
+    width: 160px;
+  }
+
+  .food__product-image {
+    max-width: 160px;
+  }
+}
+
