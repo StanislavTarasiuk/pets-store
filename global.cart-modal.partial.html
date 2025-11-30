@@ -1,0 +1,92 @@
+<div class="cart-modal" data-cart-modal aria-hidden="true">
+  <div class="cart-modal__overlay"></div>
+  <div class="cart-modal__content">
+    <div class="cart-modal__header">
+      <h2 class="cart-modal__title">Shopping cart</h2>
+      <button class="cart-modal__close" type="button" aria-label="Close cart">
+        <svg class="cart-modal__close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="cart-modal__body">
+      <section class="cart-modal__products">
+        <h3 class="cart-modal__products-title">Products</h3>
+        <ul class="cart-modal__products-list" data-cart-items>
+          <!-- Cart items will be rendered here -->
+        </ul>
+      </section>
+
+      <div class="cart-modal__promo">
+        <button class="cart-modal__promo-link" type="button">Promo code</button>
+      </div>
+
+      <div class="cart-modal__total">
+        <span class="cart-modal__total-label">Total:</span>
+        <span class="cart-modal__total-amount" data-cart-total>$0,00</span>
+      </div>
+
+      <section class="cart-modal__order">
+        <h3 class="cart-modal__order-title">Place an order</h3>
+        <form class="cart-modal__order-form" data-cart-form>
+          <div class="cart-modal__form-group">
+            <label class="cart-modal__form-label" for="cart-name">
+              Name <span class="cart-modal__form-required">*</span>
+            </label>
+            <input
+              class="cart-modal__form-input"
+              type="text"
+              id="cart-name"
+              name="name"
+              placeholder="Your name"
+              required
+            />
+          </div>
+
+          <div class="cart-modal__form-group">
+            <label class="cart-modal__form-label" for="cart-email">
+              Email <span class="cart-modal__form-required">*</span>
+            </label>
+            <input
+              class="cart-modal__form-input"
+              type="email"
+              id="cart-email"
+              name="email"
+              placeholder="Your email address"
+              required
+            />
+          </div>
+
+          <div class="cart-modal__form-group">
+            <label class="cart-modal__form-label" for="cart-phone">
+              Phone <span class="cart-modal__form-required">*</span>
+            </label>
+            <input
+              class="cart-modal__form-input"
+              type="tel"
+              id="cart-phone"
+              name="phone"
+              placeholder="Your phone"
+              required
+            />
+          </div>
+
+          <div class="cart-modal__form-group">
+            <label class="cart-modal__form-label" for="cart-comment">Comment</label>
+            <textarea
+              class="cart-modal__form-textarea"
+              id="cart-comment"
+              name="comment"
+              placeholder="Your comment"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <button class="cart-modal__checkout" type="submit">Checkout</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
+

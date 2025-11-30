@@ -13,7 +13,7 @@
 
     for (const product of products) {
       const productHtml = `
-          <article class="trending-carousel__item">
+          <article class="trending-carousel__item" data-product-id="${product.id}">
             <div class="trending-carousel__item-image-wrapper">
               <img
                 class="trending-carousel__item-image"
