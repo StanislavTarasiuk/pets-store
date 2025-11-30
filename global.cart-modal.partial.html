@@ -25,7 +25,8 @@
 
       <section class="cart-modal__order">
         <h3 class="cart-modal__order-title">Place an order</h3>
-        <form class="cart-modal__order-form" data-cart-form>
+        <div id="cart-modal__order-form-status" class="cart-modal__form-status"></div>
+        <form id="cart-modal__order-form" action="https://formspree.io/f/mnnendwr" method="post" class="cart-modal__order-form" data-cart-form>
           <div class="cart-modal__form-group">
             <label class="cart-modal__form-label" for="cart-name">
               Name <span class="cart-modal__form-required">*</span>
@@ -83,6 +84,15 @@
         </form>
       </section>
     </div>
+  </div>
+</div>
+
+<!-- Success/Error Modal -->
+<div class="cart-modal__message" data-cart-message aria-hidden="true">
+  <div class="cart-modal__message-overlay"></div>
+  <div class="cart-modal__message-content">
+    <div class="cart-modal__message-icon" data-message-icon></div>
+    <p class="cart-modal__message-text" data-message-text></p>
   </div>
 </div>
 

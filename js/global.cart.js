@@ -76,8 +76,15 @@ function setupEventListeners() {
 
   // Close on Escape key
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && cartModal?.getAttribute("aria-hidden") === "false") {
-      closeModal();
+    if (e.key === "Escape") {
+      const cartModal = document.querySelector("[data-cart-modal]");
+      const messageModal = document.querySelector("[data-cart-message]");
+      
+      if (cartModal?.getAttribute("aria-hidden") === "false") {
+        closeModal();
+      } else if (messageModal?.getAttribute("aria-hidden") === "false") {
+        closeMessageModal();
+      }
     }
   });
 }
@@ -343,8 +350,57 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
+// Show message modal (success or error)
+function showMessageModal(message, type) {
+  const messageModal = document.querySelector("[data-cart-message]");
+  const messageIcon = document.querySelector("[data-message-icon]");
+  const messageText = document.querySelector("[data-message-text]");
+  
+  if (!messageModal || !messageIcon || !messageText) return;
+
+  // Set message text
+  messageText.textContent = message;
+
+  // Set icon based on type
+  if (type === "success") {
+    messageIcon.innerHTML = `
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M8 12l2 2 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+    messageIcon.className = "cart-modal__message-icon cart-modal__message-icon--success";
+  } else {
+    messageIcon.innerHTML = `
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M15 9l-6 6M9 9l6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    `;
+    messageIcon.className = "cart-modal__message-icon cart-modal__message-icon--error";
+  }
+
+  // Show modal
+  messageModal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  // Auto close after 3 seconds
+  setTimeout(() => {
+    closeMessageModal();
+  }, 3000);
+}
+
+// Close message modal
+function closeMessageModal() {
+  const messageModal = document.querySelector("[data-cart-message]");
+  if (!messageModal) return;
+
+  messageModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
 // Handle checkout
-function handleCheckout(e) {
+async function handleCheckout(e) {
   e.preventDefault();
 
   if (cartState.length === 0) {
@@ -352,31 +408,53 @@ function handleCheckout(e) {
     return;
   }
 
-  const formData = new FormData(e.target);
-  const orderData = {
-    items: cartState,
-    total: calculateTotal(),
-    customer: {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      phone: formData.get("phone"),
-      comment: formData.get("comment"),
-    },
-  };
+  const form = e.target;
+  const formData = new FormData(form);
+  const total = calculateTotal();
 
-  // Here you would typically send the order to a server
-  console.log("Order submitted:", orderData);
+  // Add cart data to form data
+  cartState.forEach((item, index) => {
+    const itemPrefix = `cart_item_${index}_`;
+    formData.append(`${itemPrefix}name`, item.name);
+    formData.append(`${itemPrefix}price`, item.price);
+    formData.append(`${itemPrefix}quantity`, item.quantity);
+  });
+  formData.append('cart_total', formatPrice(total));
+  formData.append('cart_items_count', cartState.reduce((sum, item) => sum + item.quantity, 0));
 
-  // For now, just show an alert
-  alert(
-    `Order placed successfully!\nTotal: ${formatPrice(orderData.total)}\n\nThank you for your order!`
-  );
+  // Submit form to Formspree using fetch
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    });
 
-  // Clear cart
-  cartState = [];
-  saveToStorage();
-  renderCart();
-  closeModal();
+    if (response.ok) {
+      // Show success message modal
+      showMessageModal("Thank you for your purchase, we will contact you", "success");
+
+      // Clear cart
+      cartState = [];
+      saveToStorage();
+      renderCart();
+      
+      // Reset form
+      form.reset();
+      
+      // Close cart modal
+      closeModal();
+    } else {
+      const data = await response.json();
+      const errorMessage = data.error || "Oops! There was a problem submitting your form";
+      showMessageModal(errorMessage, "error");
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    showMessageModal("Oops! There was a problem submitting your form", "error");
+  }
 }
 
 // Save to localStorage

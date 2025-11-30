@@ -4,6 +4,7 @@ async function init() {
     await import('./index.arrivals-carousel.js');
     await import('./index.testimonials.js');
     await import('./homepage.js');
+    await import('./global.product-form.js');
     const { initCart } = await import('./global.cart.js');
     initCart();
 }
