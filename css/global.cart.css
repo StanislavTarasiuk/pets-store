@@ -8,17 +8,17 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  display: flex;
+  display: none; /* Hidden by default, shown by JS when cart has items */
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 66px;
+  height: 66px;
 }
 
 .cart__icon-wrapper {
   position: relative;
-  width: 48px;
-  height: 48px;
+  width: 66px;
+  height: 66px;
   background-color: var(--color-white);
   border: 1px solid var(--color-cart-icon-border);
   border-radius: 50%;

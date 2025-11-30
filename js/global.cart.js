@@ -10,6 +10,17 @@ export function initCart() {
   renderCart();
   setupEventListeners();
   setupAddToCartButtons();
+  
+  // Initial icon visibility check
+  const cartIcon = document.querySelector(".cart__icon");
+  const totalItems = cartState.reduce((sum, item) => sum + item.quantity, 0);
+  if (cartIcon) {
+    if (totalItems === 0) {
+      cartIcon.style.display = "none";
+    } else {
+      cartIcon.style.display = "flex";
+    }
+  }
 }
 
 // Setup event listeners for cart icon and modal
@@ -71,22 +82,40 @@ function setupEventListeners() {
   });
 }
 
-// Setup Add to Cart buttons from carousels
-async function setupAddToCartButtons() {
-  // Load products from API to get IDs
-  let productsMap = new Map();
+// Products map cache
+let productsMapCache = null;
+
+// Load products map (cached)
+async function loadProductsMap() {
+  if (productsMapCache) {
+    return productsMapCache;
+  }
+
+  productsMapCache = new Map();
   try {
     const response = await fetch("api/product.json");
     const products = await response.json();
     products.forEach((product) => {
-      productsMap.set(product.name, product);
+      productsMapCache.set(product.name, product);
     });
   } catch (error) {
     console.error("Error loading products:", error);
   }
+  return productsMapCache;
+}
 
-  // Use event delegation for dynamically added buttons
-  document.addEventListener("click", (e) => {
+// Flag to track if add to cart listener is set up
+let addToCartListenerAdded = false;
+
+// Setup Add to Cart buttons from carousels
+function setupAddToCartButtons() {
+  // Use event delegation on document level (only once)
+  if (addToCartListenerAdded) {
+    return; // Already set up
+  }
+  addToCartListenerAdded = true;
+
+  document.addEventListener("click", async (e) => {
     const button = e.target.closest(
       ".trending-carousel__item-button, .arrivals-carousel__item-button"
     );
@@ -108,6 +137,9 @@ async function setupAddToCartButtons() {
     )?.src;
 
     if (productName && productPrice && productImage) {
+      // Load products map
+      const productsMap = await loadProductsMap();
+
       // Get product ID from data attribute first, then from map, then fallback
       const productIdFromData = item.dataset.productId;
       let productId = productIdFromData;
@@ -147,7 +179,6 @@ function addItem(product) {
 
   saveToStorage();
   renderCart();
-  openModal();
 }
 
 // Remove item from cart
@@ -191,11 +222,20 @@ function renderCart() {
 
   if (!itemsContainer) return;
 
-  // Update badge
+  // Update badge and icon visibility
   const totalItems = cartState.reduce((sum, item) => sum + item.quantity, 0);
   if (badgeElement) {
     badgeElement.textContent = totalItems;
     badgeElement.setAttribute("data-cart-count", totalItems);
+  }
+
+  // Show/hide cart icon based on cart state
+  if (cartIcon) {
+    if (totalItems === 0) {
+      cartIcon.style.display = "none";
+    } else {
+      cartIcon.style.display = "flex";
+    }
   }
 
   // Render items
