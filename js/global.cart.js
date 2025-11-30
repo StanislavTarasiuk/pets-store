@@ -351,7 +351,7 @@ function closeModal() {
 }
 
 // Show message modal (success or error)
-function showMessageModal(message, type) {
+export function showMessageModal(message, type) {
   const messageModal = document.querySelector("[data-cart-message]");
   const messageIcon = document.querySelector("[data-message-icon]");
   const messageText = document.querySelector("[data-message-text]");
