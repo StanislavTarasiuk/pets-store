@@ -2,7 +2,7 @@
   function getHomepageUrl(productId) {
     const pathname = window.location.pathname;
     const basePath = pathname.substring(0, pathname.lastIndexOf('/') + 1);
-    return basePath + 'homepage.html?id=' + productId;
+    return basePath + 'homepage?id=' + productId;
   }
 
   function renderProducts(products) {
