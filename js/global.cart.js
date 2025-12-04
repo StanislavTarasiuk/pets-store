@@ -1,29 +1,19 @@
-// Cart state
 let cartState = [];
-
-// Storage key
 const STORAGE_KEY = "pets-store-cart";
 
-// Initialize cart
 export function initCart() {
   loadFromStorage();
   renderCart();
   setupEventListeners();
   setupAddToCartButtons();
   
-  // Initial icon visibility check
   const cartIcon = document.querySelector(".cart__icon");
   const totalItems = cartState.reduce((sum, item) => sum + item.quantity, 0);
   if (cartIcon) {
-    if (totalItems === 0) {
-      cartIcon.style.display = "none";
-    } else {
-      cartIcon.style.display = "flex";
-    }
+    cartIcon.style.display = totalItems === 0 ? "none" : "flex";
   }
 }
 
-// Setup event listeners for cart icon and modal
 function setupEventListeners() {
   const cartIcon = document.querySelector(".cart__icon");
   const cartModal = document.querySelector("[data-cart-modal]");
@@ -47,8 +37,6 @@ function setupEventListeners() {
     cartForm.addEventListener("submit", handleCheckout);
   }
 
-  // Setup event delegation for cart items (quantity buttons, remove buttons)
-  // Use modal as delegate to avoid multiple listeners
   if (cartModal && !cartModal.dataset.itemsListenerAdded) {
     cartModal.dataset.itemsListenerAdded = "true";
     cartModal.addEventListener("click", (e) => {
@@ -74,7 +62,6 @@ function setupEventListeners() {
     });
   }
 
-  // Close on Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       const cartModal = document.querySelector("[data-cart-modal]");
@@ -89,10 +76,8 @@ function setupEventListeners() {
   });
 }
 
-// Products map cache
 let productsMapCache = null;
 
-// Load products map (cached)
 async function loadProductsMap() {
   if (productsMapCache) {
     return productsMapCache;
@@ -111,15 +96,10 @@ async function loadProductsMap() {
   return productsMapCache;
 }
 
-// Flag to track if add to cart listener is set up
 let addToCartListenerAdded = false;
 
-// Setup Add to Cart buttons from carousels
 function setupAddToCartButtons() {
-  // Use event delegation on document level (only once)
-  if (addToCartListenerAdded) {
-    return; // Already set up
-  }
+  if (addToCartListenerAdded) return;
   addToCartListenerAdded = true;
 
   document.addEventListener("click", async (e) => {
@@ -144,10 +124,7 @@ function setupAddToCartButtons() {
     )?.src;
 
     if (productName && productPrice && productImage) {
-      // Load products map
       const productsMap = await loadProductsMap();
-
-      // Get product ID from data attribute first, then from map, then fallback
       const productIdFromData = item.dataset.productId;
       let productId = productIdFromData;
 
@@ -171,7 +148,6 @@ function setupAddToCartButtons() {
   });
 }
 
-// Add item to cart
 export function addItem(product) {
   const existingItem = cartState.find((item) => item.id === product.id);
 
@@ -188,14 +164,12 @@ export function addItem(product) {
   renderCart();
 }
 
-// Remove item from cart
 function removeItem(id) {
   cartState = cartState.filter((item) => item.id !== id);
   saveToStorage();
   renderCart();
 }
 
-// Update quantity
 function updateQuantity(id, delta) {
   const item = cartState.find((item) => item.id === id);
   if (!item) return;
@@ -205,22 +179,18 @@ function updateQuantity(id, delta) {
   renderCart();
 }
 
-// Calculate total
 function calculateTotal() {
   return cartState.reduce((total, item) => {
-    // Parse price like "$8,00" or "$23,00"
     const priceStr = item.price.replace(/[^0-9,]/g, "").replace(",", ".");
     const price = parseFloat(priceStr) || 0;
     return total + price * item.quantity;
   }, 0);
 }
 
-// Format price
 function formatPrice(price) {
   return `$${price.toFixed(2).replace(".", ",")}`;
 }
 
-// Render cart
 function renderCart() {
   const itemsContainer = document.querySelector("[data-cart-items]");
   const totalElement = document.querySelector("[data-cart-total]");
@@ -229,23 +199,16 @@ function renderCart() {
 
   if (!itemsContainer) return;
 
-  // Update badge and icon visibility
   const totalItems = cartState.reduce((sum, item) => sum + item.quantity, 0);
   if (badgeElement) {
     badgeElement.textContent = totalItems;
     badgeElement.setAttribute("data-cart-count", totalItems);
   }
 
-  // Show/hide cart icon based on cart state
   if (cartIcon) {
-    if (totalItems === 0) {
-      cartIcon.style.display = "none";
-    } else {
-      cartIcon.style.display = "flex";
-    }
+    cartIcon.style.display = totalItems === 0 ? "none" : "flex";
   }
 
-  // Render items
   if (cartState.length === 0) {
     itemsContainer.innerHTML = `
       <li class="cart-modal__empty">
@@ -258,9 +221,7 @@ function renderCart() {
     return;
   }
 
-  const itemsHtml = cartState
-    .map(
-      (item) => `
+  const itemsHtml = cartState.map((item) => `
     <li class="cart-modal__product-item" data-product-id="${item.id}">
       <img
         class="cart-modal__product-image"
@@ -319,20 +280,16 @@ function renderCart() {
         </svg>
       </button>
     </li>
-  `
-    )
-    .join("");
+  `).join("");
 
   itemsContainer.innerHTML = itemsHtml;
 
-  // Update total
   const total = calculateTotal();
   if (totalElement) {
     totalElement.textContent = formatPrice(total);
   }
 }
 
-// Open modal
 function openModal() {
   const modal = document.querySelector("[data-cart-modal]");
   if (!modal) return;
@@ -341,7 +298,6 @@ function openModal() {
   document.body.style.overflow = "hidden";
 }
 
-// Close modal
 function closeModal() {
   const modal = document.querySelector("[data-cart-modal]");
   if (!modal) return;
@@ -350,7 +306,6 @@ function closeModal() {
   document.body.style.overflow = "";
 }
 
-// Show message modal (success or error)
 export function showMessageModal(message, type) {
   const messageModal = document.querySelector("[data-cart-message]");
   const messageIcon = document.querySelector("[data-message-icon]");
@@ -358,10 +313,8 @@ export function showMessageModal(message, type) {
   
   if (!messageModal || !messageIcon || !messageText) return;
 
-  // Set message text
   messageText.textContent = message;
 
-  // Set icon based on type
   if (type === "success") {
     messageIcon.innerHTML = `
       <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -380,17 +333,14 @@ export function showMessageModal(message, type) {
     messageIcon.className = "cart-modal__message-icon cart-modal__message-icon--error";
   }
 
-  // Show modal
   messageModal.setAttribute("aria-hidden", "false");
   document.body.style.overflow = "hidden";
 
-  // Auto close after 3 seconds
   setTimeout(() => {
     closeMessageModal();
   }, 3000);
 }
 
-// Close message modal
 function closeMessageModal() {
   const messageModal = document.querySelector("[data-cart-message]");
   if (!messageModal) return;
@@ -399,7 +349,6 @@ function closeMessageModal() {
   document.body.style.overflow = "";
 }
 
-// Handle checkout
 async function handleCheckout(e) {
   e.preventDefault();
 
@@ -412,7 +361,6 @@ async function handleCheckout(e) {
   const formData = new FormData(form);
   const total = calculateTotal();
 
-  // Add cart data to form data
   cartState.forEach((item, index) => {
     const itemPrefix = `cart_item_${index}_`;
     formData.append(`${itemPrefix}name`, item.name);
@@ -422,7 +370,6 @@ async function handleCheckout(e) {
   formData.append('cart_total', formatPrice(total));
   formData.append('cart_items_count', cartState.reduce((sum, item) => sum + item.quantity, 0));
 
-  // Submit form to Formspree using fetch
   try {
     const response = await fetch(form.action, {
       method: form.method,
@@ -433,18 +380,11 @@ async function handleCheckout(e) {
     });
 
     if (response.ok) {
-      // Show success message modal
       showMessageModal("Thank you for your purchase, we will contact you", "success");
-
-      // Clear cart
       cartState = [];
       saveToStorage();
       renderCart();
-      
-      // Reset form
       form.reset();
-      
-      // Close cart modal
       closeModal();
     } else {
       const data = await response.json();
@@ -457,7 +397,6 @@ async function handleCheckout(e) {
   }
 }
 
-// Save to localStorage
 function saveToStorage() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(cartState));
@@ -466,7 +405,6 @@ function saveToStorage() {
   }
 }
 
-// Load from localStorage
 function loadFromStorage() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
@@ -479,31 +417,26 @@ function loadFromStorage() {
   }
 }
 
-// Clear cart (exported for external use)
 export function clearCart() {
   cartState = [];
   saveToStorage();
   renderCart();
-  console.log("Cart cleared successfully");
 }
 
-// Initialize on DOM ready
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", initCart);
 } else {
   initCart();
 }
 
-// Re-initialize on HTMX swaps
 if (typeof htmx !== "undefined") {
   document.body.addEventListener("htmx:afterSwap", () => {
-    // Only re-setup if modal was swapped (recreated)
     const cartModal = document.querySelector("[data-cart-modal]");
     if (cartModal && !cartModal.dataset.itemsListenerAdded) {
       setupEventListeners();
     }
     setupAddToCartButtons();
-    renderCart(); // Re-render cart after swap
+    renderCart();
   });
 }
 

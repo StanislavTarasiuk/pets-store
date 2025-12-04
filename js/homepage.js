@@ -1,5 +1,4 @@
 (async function () {
-  // Initialize cart after HTMX loads cart elements
   async function initCartAfterLoad() {
     const totalPartials = document.querySelectorAll('[hx-trigger="load"]').length;
     let loadedPartialsCount = 0;
@@ -15,7 +14,6 @@
 
     document.body.addEventListener('htmx:afterOnLoad', checkAndInit);
     
-    // Fallback: if all partials already loaded
     setTimeout(async () => {
       if (document.querySelector('.cart__icon') && document.querySelector('[data-cart-modal]')) {
         const { initCart } = await import('./global.cart.js');
@@ -25,12 +23,10 @@
     }, 100);
   }
 
-  // Setup Add to Cart button for product page
   async function setupProductPageAddToCart() {
     const addToCartBtn = document.querySelector(".product-page__add-to-cart");
     if (!addToCartBtn) return;
 
-    // Remove existing listener if any
     const newBtn = addToCartBtn.cloneNode(true);
     addToCartBtn.parentNode.replaceChild(newBtn, addToCartBtn);
 
@@ -63,7 +59,6 @@
     });
   }
 
-  // Start initialization
   initCartAfterLoad();
 
   function initQuantityControls() {
@@ -168,8 +163,6 @@
     if (desc) desc.innerText = product.description;
 
     document.title = `${product.name} - Product Details`;
-    
-    // Ensure add to cart button is set up after product is rendered
     setupProductPageAddToCart();
   }
 })();
