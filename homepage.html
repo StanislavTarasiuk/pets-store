@@ -13,6 +13,8 @@
     />
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/global.header-nav.css" />
+    <link rel="stylesheet" href="css/global.footer.css" />
+    <link rel="stylesheet" href="css/global.cart.css" />
     <link rel="stylesheet" href="css/homepage.css" />
     <script
       src="https://unpkg.com/htmx.org@1.9.10"
@@ -28,6 +30,16 @@
         hx-get="global.header-nav.partial.html"
       ></nav>
     </header>
+    <div
+      hx-trigger="load"
+      hx-swap="outerHTML"
+      hx-get="global.cart-icon.partial.html"
+    ></div>
+    <div
+      hx-trigger="load"
+      hx-swap="outerHTML"
+      hx-get="global.cart-modal.partial.html"
+    ></div>
 
     <main class="main">
       <div class="product-page">

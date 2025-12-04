@@ -172,15 +172,15 @@ function setupAddToCartButtons() {
 }
 
 // Add item to cart
-function addItem(product) {
+export function addItem(product) {
   const existingItem = cartState.find((item) => item.id === product.id);
 
   if (existingItem) {
-    existingItem.quantity += 1;
+    existingItem.quantity += (product.quantity || 1);
   } else {
     cartState.push({
       ...product,
-      quantity: 1,
+      quantity: product.quantity || 1,
     });
   }
 
