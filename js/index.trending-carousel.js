@@ -38,7 +38,8 @@
   async function loadAndRenderProducts() {
     try {
       const response = await fetch("api/product.json");
-      const products = await response.json();
+      const allProducts = await response.json();
+      const products = allProducts.filter(p => p.id >= 1 && p.id <= 5);
       renderProducts(products);
       return products;
     } catch (error) {
